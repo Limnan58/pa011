@@ -1,0 +1,30 @@
+﻿using System;
+using System.Collections;
+using System.Collections.Generic;
+using NUnit.Framework;
+using UnityEditor;
+using UnityEngine;
+using UnityEngine.TestTools;
+
+namespace Tests
+{
+    public class NewTestScript
+    {
+        // A Test behaves as an ordinary method
+        [UnityTest]
+        public IEnumerator _Instantiantes_Gameobject()
+        {
+            Debug.Log("kek");
+            Spawnerscript spawner = new GameObject().AddComponent<Spawnerscript>();
+            GameObject[] spawnPref = {Resources.Load<GameObject>("Prefabs/RedCube")as GameObject
+                ,Resources.Load<GameObject>("Prefabs/GreenCube")as GameObject
+                ,Resources.Load<GameObject>("Prefabs/BrownCube") };
+            spawner.SpawnObject = spawnPref;
+            Debug.Log(spawner.SpawnObject[0]);
+            yield return null;
+            GameObject findobj = GameObject.FindGameObjectWithTag("Obstacle");
+            Assert.NotNull(findobj);
+        }
+
+    }
+}
